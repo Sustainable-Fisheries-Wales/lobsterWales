@@ -1,5 +1,4 @@
 # data entry check for the crab and lobster stock observer data - wales
-# created: 6/3/2024 by Daisuke Goto (d.goto@bangor.ac.uk)
 
 # Check if required packages are installed
 required <- c("readr", "dplyr", "lubridate", "tidyr", "pointblank", "janitor")
@@ -8,9 +7,12 @@ installed <- rownames(installed.packages())
 install.packages(not_installed, dependencies=TRUE)
 
 # read in data
+# set a working directory
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("..")
-observer_data_unprocessed <- readr::read_csv("data/wales/Onboard Observer - GPS included.csv", 
+# set a file name
+filename <- "Onboard Observer - GPS included.csv"
+observer_data_unprocessed <- readr::read_csv(paste0("data/wales/", filename), 
                                              col_types = readr::cols(ICES_sub_rect = readr::col_character())) |>  
   dplyr::select(-...39) |> dplyr::glimpse()
 
