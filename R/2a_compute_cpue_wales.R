@@ -16,9 +16,6 @@ observer_data_lobster <- readr::read_csv("processed_data/wales/observer_data_lob
                                          col_types = readr::cols(ices_sub_rect = readr::col_character(),
                                                                  lat = readr::col_double())) |> 
   dplyr::glimpse()
-observer_data_crab <- readr::read_csv("processed_data/wales/observer_data_crab_clean.csv", 
-                                      col_types = readr::cols(ices_sub_rect = readr::col_character())) |> 
-  dplyr::glimpse()
 
 # function to compute nominal catch, landings, cpue, and lpue per fishing trip 
 compute_cpue.lpue <- function(data) {
@@ -127,14 +124,10 @@ observer_data_crab_out_u10 <- compute_cpue.lpue(observer_data_crab_u10) # crab
 
 # export output as rds (as a list)
 readr::write_rds(observer_data_lobster_out, file = "processed_data/wales/observer_data_lobster_nominal.cpue.rds") # lobster
-readr::write_rds(observer_data_crab_out, file = "processed_data/wales/observer_data_crab_nominal.cpue.rds") # crab
 
 # export output as csv
 readr::write_csv(observer_data_lobster_out[[1]], file = "processed_data/wales/observer_data_lobster_nominal.cpue_trip.csv") 
-readr::write_csv(observer_data_crab_out[[1]], file = "processed_data/wales/observer_data_crab_nominal.cpue_trip.csv")
 readr::write_csv(observer_data_lobster_out[[2]], file = "processed_data/wales/observer_data_lobster_nominal.cpue_potset.csv") 
-readr::write_csv(observer_data_crab_out[[2]], file = "processed_data/wales/observer_data_crab_nominal.cpue_potset.csv")
-
 
 # plot output
 # temporal variation
@@ -183,16 +176,10 @@ ggplot2::ggsave(file=paste0("plots/wales/", "observer_trends_wales_", response.n
 data <- observer_data_lobster_out[[2]]
 response <- data$nominal.cpue_potset
 response.name <- "nominal cpue (kg per number of pots hauled)"
-
-# wales <- rgdal::readOGR(dsn = "data/wales/wnmp_areas/wnmp_areas.shp", stringsAsFactors = FALSE)
-# #wales <- rgdal::readOGR(dsn = "data/wales/wnmp_general_policies/wnmp_general_policies.shp", stringsAsFactors = FALSE)
-# #world.coast <- rgdal::readOGR(dsn = file.path(getwd(), "data/ne_110m_coastline"), layer = "ne_110m_coastline")
-# #world.coast <- sp::spTransform(world.coast, sp::CRS("+proj=longlat +datum=WGS84"))
 xlim <- c(min(data$lon, na.rm = TRUE)*1.05,
           max(data$lon, na.rm = TRUE)*0.85)
 ylim <- c(min(data$lat, na.rm = TRUE)*.995,
           max(data$lat, na.rm = TRUE)*1.01)
-# world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
 
 # wales shape file
 wales <- sf::read_sf(dsn = "data/wales/wnmp_areas/wnmp_areas.shp", stringsAsFactors = FALSE)
@@ -219,25 +206,6 @@ ylim <- c(min(shp_ices.rec_wales$SOUTH, na.rm = TRUE),
 
 data <- data |> dplyr::filter((lon >= min(shp_ices.rec_wales$WEST)) & (lon <= max(shp_ices.rec_wales$EAST)) & 
                                 (lat >= min(shp_ices.rec_wales$SOUTH)) & (lat <= max(shp_ices.rec_wales$NORTH)))
-#data <- data |> dplyr::filter((lon <= max(shp_ices.rec_wales$NORTH)*0.5))
-
-##############################################
-# wales.tracts.int <- sf::st_join(wales, shp_ices.rec_wales, 
-#                                 join = sf::st_intersects, left=FALSE)
-# tmap::tm_shape(wales.tracts.int) +
-#   tmap::tm_polygons(col = "blue") +
-#   tmap::tm_shape(shp_ices.rec_wales) +  
-#   tmap::tm_borders(col = "red")
-# sac.metro.tracts.w <- sf::st_join(wales, shp_ices.rec_wales, 
-#                                   join = sf::st_within, left=FALSE)
-# sac.metro.tracts.w <- rmapshaper::ms_clip(target = wales, 
-#                                           clip = shp_ices.rec_wales, remove_slivers = TRUE)
-# tmap::tm_shape(sac.metro.tracts.w) +
-#   tmap::tm_polygons(col = "blue") +
-#   tmap::tm_shape(shp_ices.rec_wales) +
-#   tmap::tm_borders(col = "red")
-##############################################
-
 (plot2 <- ggplot2::ggplot() +  
   ggplot2::scale_color_manual(values = mycolors) +
     ggplot2::geom_sf(data = wales, ggplot2::aes(fill = name), alpha = 0.2,  colour = "black") +
@@ -272,7 +240,6 @@ data <- data |> dplyr::filter((lon >= min(shp_ices.rec_wales$WEST)) & (lon <= ma
 
 # export plot
 ggplot2::ggsave(file=paste0("plots/wales/", response.name, "_observer_space_wales_filter2_",  unique(data$species), ".svg"), plot=plot2, width=12, height=8)
-
 
 # size structure
 # select a dataset
