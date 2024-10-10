@@ -1,4 +1,4 @@
-# data entry check for the crab and lobster stock observer data - wales
+# data entry check for the observer data - wales
 
 # Check if required packages are installed
 required <- c("readr", "dplyr", "lubridate", "tidyr", "pointblank", "janitor")
