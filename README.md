@@ -1,5 +1,5 @@
 ### Welsh lobster stock assessment 
-This repository contains code used for the stock assessment work (data processing and assessment model fitting using Stock Synthesis (SS3)) for the Welsh stock of European lobster (Homarus gammarus).
+This repository contains code used for the 2023 stock assessment work (data processing and assessment model fitting using Stock Synthesis (SS3)) for the Welsh stock of European lobster (Homarus gammarus).
 
 ##### Time series of the spawning stock biomass (SSB), fishing mortality (F), and relative SSB and F with Bmsy and Fsmy of the Welsh lobster stock during 1983–2023.
 <img src="https://github.com/Sustainable-Fisheries-Wales/lobsterWales/blob/main/plots/assessment2024_lobster_wales.png?raw=true" width="700"> 
