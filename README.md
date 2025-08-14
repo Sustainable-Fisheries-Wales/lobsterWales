@@ -30,7 +30,7 @@ R (folder)
 
 #### Description
 
-data: This folder contains data and derived parameter files
+R: This folder contains R files for data processing and model-fitting
 
 `1.observer_data.entrycheck_wales.R`: a script for assessing the structure and type of raw input data files
 
