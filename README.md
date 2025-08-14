@@ -4,7 +4,7 @@ This repository contains code used for the 2023 stock assessment work (data proc
 ##### Time series of the spawning stock biomass (SSB), fishing mortality (F), and relative SSB and F with Bmsy and Fsmy of the Welsh lobster stock during 1983–2023.
 <img src="https://github.com/Sustainable-Fisheries-Wales/lobsterWales/blob/main/plots/assessment2024_lobster_wales.png?raw=true" width="700"> 
 
-##### Kobe plot of SSB/Bmsy and F/Fsmy of the Welsh lobster stock during 1983–2023.
+##### Kobe plot of SSB/Bmsy vs. F/Fsmy of the Welsh lobster stock during 1983–2023.
 <img src="https://github.com/Sustainable-Fisheries-Wales/lobsterWales/blob/main/plots/kobe_plot_lobster_wales.png?raw=true" width="700"> 
 
 #### File list
